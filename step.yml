@@ -12,7 +12,7 @@ title: |-
 summary: |
   Uploads an application to Kobiton App Repo
 description: |
-  This step will take an .apk or .ipa file and upload it to the Kobiton App Repository
+  This step will take an .apk or .ipa file and upload it to the Kobiton App Repository. You can find your API key at [Kobiton](https://portal.kobiton.com/settings/keys)
 website: https://kobiton.com
 source_code_url: https://github.com/kobiton/bitrise-step-kobiton-upload-apps-repo
 support_url: https://github.com/kobiton/bitrise-step-kobiton-upload-apps-repo/issues
