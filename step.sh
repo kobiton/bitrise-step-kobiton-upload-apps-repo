@@ -1,14 +1,6 @@
 #!/bin/bash
 set -ex
 
-# Install ack
-curl https://beyondgrep.com/ack-2.22-single-file >/usr/local/bin/ack && chmod 0755 /usr/local/bin/ack
-
-hash ack 2>/dev/null || {
-    echo >&2 "ack required, but it's not installed."
-    exit 1
-}
-
 APP_NAME_INPUT=${kobiton_app_name}
 APP_PATH_INPUT=${kobiton_app_path}
 APP_ID_INPUT=${kobiton_app_id}
