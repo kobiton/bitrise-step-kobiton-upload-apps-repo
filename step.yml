@@ -45,13 +45,13 @@ is_always_run: false
 is_skippable: false
 run_if: ""
 
-  deps:
-    brew:
-    - name: curl
-    - name: ack
+deps:
+  brew:
+  - name: curl
+  - name: ack
   apt_get:
-    - name: curl
-    - name: ack
+  - name: curl
+  - name: ack
 
 toolkit:
   bash:
