@@ -62,7 +62,7 @@ inputs:
   - kobiton_app_name: $BITRISE_APP_TITLE
     opts:
       title: "App Name"
-      summary: Title of the app beign built
+      summary: Title of the app being built
       is_expand: true
       is_required: true
   - kobiton_app_path: $BITRISE_SIGNED_APK_PATH

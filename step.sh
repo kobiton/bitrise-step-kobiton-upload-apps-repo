@@ -19,7 +19,7 @@ else
     JSON="{\"filename\":\"${APP_NAME_INPUT}.${APP_SUFFIX_INPUT}\",\"appId\":$APP_ID_INPUT}"
 fi
 
-curl --silent -X POST https://api-test.kobiton.com/v1/apps/uploadUrl \
+curl --silent -X POST https://api.kobiton.com/v1/apps/uploadUrl \
     -H "Authorization: Basic $BASICAUTH" \
     -H 'Content-Type: application/json' \
     -H 'Accept: application/json' \
@@ -43,7 +43,7 @@ curl --progress-bar -T "${APP_PATH_INPUT}" \
 echo "Processing: ${KAPPPATH}"
 
 JSON="{\"filename\":\"${APP_NAME_INPUT}.${APP_SUFFIX_INPUT}\",\"appPath\":\"${KAPPPATH}\"}"
-curl -X POST https://api-test.kobiton.com/v1/apps \
+curl -X POST https://api.kobiton.com/v1/apps \
     -H "Authorization: Basic $BASICAUTH" \
     -H 'Content-Type: application/json' \
     -d $JSON \
@@ -57,14 +57,14 @@ APP_VERSION_ID=$(cat ".tmp.upload-app-response.json" | ack -o --match '(?<=versi
 # Kobiton need some times to update the appId for new appVersion
 sleep 30
 
-curl -X GET https://api-test.kobiton.com/v1/app/versions/$APP_VERSION_ID \
+curl -X GET https://api.kobiton.com/v1/app/versions/$APP_VERSION_ID \
     -H "Authorization: Basic $BASICAUTH" \
     -H "Accept: application/json" \
     -o ".tmp.get-appversion-response.json"
 
 APP_ID=$(cat ".tmp.get-appversion-response.json" | ack -o --match '(?<=appId\":)([_\%\&=\?\.aA-zZ0-9:/-]*)')
 
-curl -X PUT https://api-test.kobiton.com/v1/apps/$APP_ID/$KOB_APP_ACCESS \
+curl -X PUT https://api.kobiton.com/v1/apps/$APP_ID/$KOB_APP_ACCESS \
     -H "Authorization: Basic $BASICAUTH"
 
 echo "Uploaded app to kobiton repo with appId: ${APP_ID} and versionId: ${APP_VERSION_ID}"
