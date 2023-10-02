@@ -10,7 +10,7 @@
 title: |-
   Upload application to Kobiton
 summary: |
-  Uploads an application to Kobiton App Repo
+  Uploads your application to the Kobiton Platform for seamless interactive app testing
 description: |
   This step will take an .apk or .ipa file and upload it to the Kobiton App Repository. You can find your API key at [Kobiton](https://portal.kobiton.com/settings/keys)
 website: https://kobiton.com
