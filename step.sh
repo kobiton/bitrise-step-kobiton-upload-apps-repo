@@ -9,9 +9,7 @@ KOB_APIKEY_INPUT=${kobiton_api_key}
 APP_SUFFIX_INPUT=${kobiton_app_type}
 KOB_APP_ACCESS=${kobiton_app_access}
 
-BASICAUTH=$(echo -n $KOB_USERNAME_INPUT:$KOB_APIKEY_INPUT | base64)
-
-echo "Using Auth: $BASICAUTH"
+BASICAUTH="$KOB_USERNAME_INPUT:$KOB_APIKEY_INPUT"
 
 if [ -z "$APP_ID_INPUT" ]; then
     JSON="{\"filename\":\"${APP_NAME_INPUT}.${APP_SUFFIX_INPUT}\"}"
@@ -20,7 +18,7 @@ else
 fi
 
 curl --silent -X POST https://api.kobiton.com/v1/apps/uploadUrl \
-    -H "Authorization: Basic $BASICAUTH" \
+    -u $BASICAUTH \
     -H 'Content-Type: application/json' \
     -H 'Accept: application/json' \
     -d $JSON \
@@ -38,13 +36,13 @@ curl --progress-bar -T "${APP_PATH_INPUT}" \
     -H "Content-Type: application/octet-stream" \
     -H "x-amz-tagging: unsaved=true" \
     -X PUT "${UPLOAD_URL}"
-#--verbose
+    # --verbose
 
 echo "Processing: ${KAPPPATH}"
 
 JSON="{\"filename\":\"${APP_NAME_INPUT}.${APP_SUFFIX_INPUT}\",\"appPath\":\"${KAPPPATH}\"}"
 curl -X POST https://api.kobiton.com/v1/apps \
-    -H "Authorization: Basic $BASICAUTH" \
+    -u $BASICAUTH \
     -H 'Content-Type: application/json' \
     -d $JSON \
     -o ".tmp.upload-app-response.json"
@@ -58,7 +56,7 @@ APP_VERSION_ID=$(cat ".tmp.upload-app-response.json" | ack -o --match '(?<=versi
 sleep 30
 
 curl -X GET https://api.kobiton.com/v1/app/versions/$APP_VERSION_ID \
-    -H "Authorization: Basic $BASICAUTH" \
+    -u $BASICAUTH \
     -H "Accept: application/json" \
     -o ".tmp.get-appversion-response.json"
 
